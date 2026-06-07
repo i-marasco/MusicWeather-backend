@@ -21,7 +21,7 @@ def get_artist(
     try:
         with conn.cursor() as cur:
             cur.execute("""
-                    SELECT "ARTIST_NAME"
+                    SELECT "ARTIST_NAME", "LISTENED_AT", "PLAYS"
                     FROM "MUSIC_TRACK"."ARTISTS"
             """)
 
@@ -32,6 +32,5 @@ def get_artist(
 
     return {
         "artists": rows
-
     }
 

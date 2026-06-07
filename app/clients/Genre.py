@@ -50,7 +50,7 @@ for artist_name in artists:
 
         cur.execute(
             """
-            INSERT INTO "MUSIC_TRACK"."GENRES" ("ARTIST_NAME", "GENRE_NAME")
+            INSERT INTO "MUSIC_TRACK"."GENRES" ("ARTIST_NAME", "GENRE_LIST")
             VALUES (%s, %s)
             ON CONFLICT ("ARTIST_NAME") DO NOTHING;
             """,
