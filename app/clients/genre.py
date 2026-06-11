@@ -1,28 +1,53 @@
+"""
+-------------------------------------------------------------------------------------------------
+genre
+-------------------------------------------------------------------------------------------------
+Purpose:
+        Update the list of listened genres.
+
+Source:
+        "MUSIC_TRACK"."HISTORIC".
+
+Input:
+        None
+
+Output:
+        "MUSIC_TRACK"."GENRES" : One row inserted for each new genres listened.
+
+Note:
+       The line inserted is a list: {rock,"hard rock","classic rock",80s,"hair metal"}.
+       In last.fm doesn't exist a way for have the genres of a song, the genres is based on the singer.
+"""
+
 import requests
 import psycopg2
 import time
-import os
 
 API_KEY = "a7955ad0f8a0d65577e476fc67694039"
 URL = "https://ws.audioscrobbler.com/2.0/"
 
-# DB connection
 conn = psycopg2.connect(
-    dbname="postgres",
+    dbname="music",
     user="postgres",
     password="admin",
     host="localhost",
     port="5432"
 )
-
 cur = conn.cursor()
 
-# 1. leggi artisti
-cur.execute('SELECT "ARTIST_NAME" FROM "MUSIC_TRACK"."ARTISTS"')
+cur.execute("""
+           SELECT "ARTIST_NAME" FROM "MUSIC_TRACK"."ARTISTS" 
+           """)
 artists = cur.fetchall()
 
 
 def get_genres(artist_name):
+    """
+    :param
+        artist_name: Name of the artist.
+    :return:
+        List of genres associated with every artist.
+    """
     params = {
         "method": "artist.gettoptags",
         "artist": artist_name,
@@ -33,19 +58,17 @@ def get_genres(artist_name):
     r = requests.get(URL, params=params)
     data = r.json()
 
-    # gestione errori API
+    # Manage if an artis is not associated to a genres.
     if "toptags" not in data or "tag" not in data["toptags"]:
         return []
 
     tags = data["toptags"]["tag"]
-
     return [t["name"] for t in tags[:5]]
 
 
 for artist_name in artists:
     try:
         genres = get_genres(artist_name)
-
         print(artist_name, genres)
 
         cur.execute(
@@ -59,7 +82,7 @@ for artist_name in artists:
 
         conn.commit()
 
-        # IMPORTANT: evita rate limit Last.fm
+        # IMPORTANT: avoid last.fm rate limit.
         time.sleep(0.25)
 
     except Exception as e:

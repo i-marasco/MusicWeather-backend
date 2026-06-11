@@ -1,7 +1,23 @@
-from fastapi import APIRouter, Query
-from datetime import datetime
+"""
+-------------------------------------------------------------------------------------------------
+artist
+-------------------------------------------------------------------------------------------------
+Purpose:
+        Output all the artist listened.
+
+Source:
+        "MUSIC_TRACK"."ARTISTS"
+
+Input:
+        None
+
+Output:
+        /artist:
+        Artist name and first time listened.
+"""
+
+from fastapi import APIRouter
 import psycopg2
-from psycopg2.extras import RealDictCursor
 
 router = APIRouter()
 def get_connection():

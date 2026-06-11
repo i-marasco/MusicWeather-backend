@@ -1,3 +1,22 @@
+"""
+-------------------------------------------------------------------------------------------------
+artist_ranking
+-------------------------------------------------------------------------------------------------
+Purpose:
+        Rank the artist WEEKLY or MONTHLY for number of track listened.
+
+Source:
+        "MUSIC_TRACK"."LISTENING_HISTORY"
+
+Input:
+        None
+
+Output:
+        "MUSIC_TRACK"."ARTIST_RANKINGS":
+        WEEKLY: Add one row for every artist listened in the current week.
+        MONTHLY: Add one row for every artist listened in the current month.
+"""
+
 import psycopg2
 from fastapi import APIRouter
 from datetime import date, timedelta
@@ -17,6 +36,15 @@ def get_connection():
     )
 
 def generate_ranking(period, start_date, end_date):
+    """
+    :param
+        period: WEEKLY or MONTHLY.
+        start_date: Start date.
+        end_date: End date.
+    :return:
+        Rank of the artists.
+    """
+
     conn = get_connection()
     try:
         with conn.cursor() as cur:
@@ -58,6 +86,10 @@ def generate_ranking(period, start_date, end_date):
 
 @router.post("/weekly")
 def weekly():
+    """
+    :return:
+        Weekly ranking.
+    """
     today = date.today()
 
     start = today - timedelta(days=today.weekday())
@@ -69,6 +101,10 @@ def weekly():
 
 @router.post("/monthly")
 def monthly():
+    """
+    :return:
+        Monthly ranking.
+    """
     today = date.today()
 
     start = today.replace(day=1)
