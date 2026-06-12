@@ -103,21 +103,31 @@ def get_period(
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
 
             query = """
-                SELECT
-                  CASE
-                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 6 AND EXTRACT(HOUR FROM "LISTENED_AT") < 12 THEN 'M'
-                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 12 AND EXTRACT(HOUR FROM "LISTENED_AT") < 18 THEN 'A'
-                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 18 AND EXTRACT(HOUR FROM "LISTENED_AT") < 21 THEN 'E'
-                    ELSE 'N'
-                  END AS period,
-                  COUNT(*) AS plays
-                FROM "MUSIC_TRACK"."LISTENING_HISTORY"
-                WHERE 1=1
+                        SELECT
+                            period,
+                            plays,
+                            ROUND(
+                                plays * 100.0 / SUM(plays) OVER (),
+                                2
+                            ) AS percentage
+                        FROM (
+                            SELECT
+                                CASE
+                                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 6
+                                         AND EXTRACT(HOUR FROM "LISTENED_AT") < 12 THEN 'Morning'
+                                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 12
+                                         AND EXTRACT(HOUR FROM "LISTENED_AT") < 18 THEN 'Afternoon'
+                                    WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 18
+                                         AND EXTRACT(HOUR FROM "LISTENED_AT") < 21 THEN 'Evening'
+                                    ELSE 'Night'
+                                END AS period,
+                                COUNT(*) AS plays
+                            FROM "MUSIC_TRACK"."LISTENING_HISTORY"
+                            WHERE 1=1
             """
 
             params = []
 
-            # Add filer only if provided
             if start_date is not None:
                 query += ' AND "LISTENED_AT" >= %s'
                 params.append(start_date)
@@ -127,8 +137,18 @@ def get_period(
                 params.append(end_date)
 
             query += """
-                GROUP BY period
-                ORDER BY period;
+                GROUP BY
+                    CASE
+                        WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 6
+                             AND EXTRACT(HOUR FROM "LISTENED_AT") < 12 THEN 'Morning'
+                        WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 12
+                             AND EXTRACT(HOUR FROM "LISTENED_AT") < 18 THEN 'Afternoon'
+                        WHEN EXTRACT(HOUR FROM "LISTENED_AT") >= 18
+                             AND EXTRACT(HOUR FROM "LISTENED_AT") < 21 THEN 'Evening'
+                        ELSE 'Night'
+                    END
+            ) t
+            ORDER BY period;
             """
 
             cur.execute(query, params)
