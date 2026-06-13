@@ -4,3 +4,4 @@ uv.lock/
 .idea/
 .venv/
 .Ds_Store/
+app/.env
