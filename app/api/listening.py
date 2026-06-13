@@ -21,7 +21,6 @@ Output:
 
 from fastapi import APIRouter, Query
 from datetime import datetime
-import psycopg2
 from psycopg2.extras import RealDictCursor
 from app.database.conn import get_connection
 

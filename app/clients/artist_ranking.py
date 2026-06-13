@@ -22,9 +22,6 @@ from fastapi import APIRouter
 from datetime import date, timedelta
 from app.database.conn import get_connection
 
-API_KEY = "a7955ad0f8a0d65577e476fc67694039"
-URL = "https://ws.audioscrobbler.com/2.0/"
-
 router = APIRouter()
 
 conn = get_connection()

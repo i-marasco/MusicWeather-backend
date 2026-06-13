@@ -20,12 +20,15 @@ Note:
 """
 
 import requests
-import psycopg2
 import time
+import os
 from app.database.conn import get_connection
+from dotenv import load_dotenv
 
-API_KEY = "a7955ad0f8a0d65577e476fc67694039"
-URL = "https://ws.audioscrobbler.com/2.0/"
+load_dotenv()
+
+LASTFM_URL = os.getenv("LASTFM_URL")
+LASTFM_API_KEY = os.getenv("LASTFM_API_KEY")
 
 conn = get_connection()
 cur = conn.cursor()
@@ -46,11 +49,11 @@ def get_genres(artist_name):
     params = {
         "method": "artist.gettoptags",
         "artist": artist_name,
-        "api_key": API_KEY,
+        "api_key": LASTFM_API_KEY,
         "format": "json"
     }
 
-    r = requests.get(URL, params=params)
+    r = requests.get(LASTFM_URL, params=params)
     data = r.json()
 
     # Manage if an artis is not associated to a genres.

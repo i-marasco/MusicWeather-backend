@@ -17,7 +17,6 @@ Output:
 """
 
 from fastapi import APIRouter
-import psycopg2
 from app.database.conn import get_connection
 
 router = APIRouter()

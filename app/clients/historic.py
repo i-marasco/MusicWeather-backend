@@ -17,24 +17,26 @@ Output:
 Note:
         Track already inserted are skipped.
 """
-
+import os
 import requests
 from app.database.conn import get_connection
+from dotenv import load_dotenv
 
-# Information to access last.fm API
-API_KEY = "a7955ad0f8a0d65577e476fc67694039"
-USER = "LevTakeshy"
-url = "https://ws.audioscrobbler.com/2.0/"
+load_dotenv()
+
+LASTFM_URL = os.getenv("LASTFM_URL")
+LASTFM_USER = os.getenv("LASTFM_USER")
+LASTFM_API_KEY = os.getenv("LASTFM_API_KEY")
 
 params = {
     "method": "user.getrecenttracks",
-    "user": USER,
-    "api_key": API_KEY,
+    "user": LASTFM_USER,
+    "api_key": LASTFM_API_KEY,
     "format": "json",
     "limit": 1000
 }
 
-response = requests.get(url, params=params)
+response = requests.get(LASTFM_URL, params=params)
 data = response.json()
 
 tracks = data["recenttracks"]["track"]
