@@ -1,3 +1,25 @@
+"""
+-------------------------------------------------------------------------------------------------
+genre_ranking.py
+-------------------------------------------------------------------------------------------------
+Purpose:
+        Output genre ranking.
+
+Source:
+        "MUSIC_TRACK"."LISTENING_HISTORY"
+        "MUSIC_TRACK"."GENRES"
+
+Inputs:
+        start_date[optional]: Start date of genre ranking
+        end_date[optional]: End date of genre ranking
+
+Output:
+        /weekly:
+            Genre weekly ranking.
+        /monthly:
+            Genre monthly ranking.
+"""
+
 from fastapi import APIRouter
 from datetime import date, timedelta
 from app.services.genre_ranking_services import generate_ranking

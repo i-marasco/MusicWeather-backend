@@ -1,20 +1,9 @@
 """
 -------------------------------------------------------------------------------------------------
-artist_ranking
+artist_ranking_services.py
 -------------------------------------------------------------------------------------------------
-Purpose:
-        Rank the artist WEEKLY or MONTHLY for number of track listened.
-
-Source:
-        "MUSIC_TRACK"."LISTENING_HISTORY"
-
-Input:
-        None
-
-Output:
-        "MUSIC_TRACK"."ARTIST_RANKINGS":
-        WEEKLY: Add one row for every artist listened in the current week.
-        MONTHLY: Add one row for every artist listened in the current month.
+Note:
+        Called by: api/artist_ranking.py
 """
 
 from fastapi import APIRouter

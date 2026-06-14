@@ -1,12 +1,12 @@
 """
 -------------------------------------------------------------------------------------------------
-update_artist
+sync_artist.py
 -------------------------------------------------------------------------------------------------
 Purpose:
         Update the list of listened artist based on listening history.
 
 Source:
-        "MUSIC_TRACK"."HISTORIC"
+        "MUSIC_TRACK"."LISTENING_HISTORY"
 
 Input:
         None

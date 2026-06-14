@@ -1,3 +1,24 @@
+"""
+-------------------------------------------------------------------------------------------------
+artist_ranking.py
+-------------------------------------------------------------------------------------------------
+Purpose:
+        Output artist ranking.
+
+Source:
+        "MUSIC_TRACK"."LISTENING_HISTORY"
+
+Inputs:
+        None
+
+Output:
+        "MUSIC_TRACK"."ARTIST_RANKINGS":
+        /weekly:
+            Artist weekly ranking.
+        /monthly:
+            Artist monthly ranking.
+"""
+
 from fastapi import APIRouter
 from datetime import date, timedelta
 from app.services.artist_ranking_services import generate_ranking

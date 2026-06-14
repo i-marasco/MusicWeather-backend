@@ -1,15 +1,9 @@
 """
 -------------------------------------------------------------------------------------------------
-genre_ranking_services
+genre_ranking_services.py
 -------------------------------------------------------------------------------------------------
-Purpose:
-
-Source:
-
-Input:
-
-Output:
-
+Note:
+        Called by: api/genre_ranking.py
 """
 
 from fastapi import APIRouter

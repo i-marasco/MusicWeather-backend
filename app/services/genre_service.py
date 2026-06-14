@@ -1,15 +1,9 @@
 """
 -------------------------------------------------------------------------------------------------
-genre_service
+genres_service.py
 -------------------------------------------------------------------------------------------------
-Purpose:
-
-Source:
-
-Input:
-
-Output:
-
+Note:
+        Called by: api/genres.py
 """
 
 from app.database.conn import get_connection

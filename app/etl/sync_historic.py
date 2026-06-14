@@ -1,6 +1,6 @@
 """
 -------------------------------------------------------------------------------------------------
-historic
+sync_historic.py
 -------------------------------------------------------------------------------------------------
 Purpose:
         Update listened song with the last.fm API.
@@ -12,7 +12,7 @@ Input:
         None
 
 Output:
-        "MUSIC_TRACK"."HISTORIC": One row inserted for each new song.
+        "MUSIC_TRACK"."LISTENING_HISTORY": One row inserted for each new song.
 
 Note:
         Track already inserted are skipped.

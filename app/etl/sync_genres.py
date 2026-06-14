@@ -1,12 +1,12 @@
 """
 -------------------------------------------------------------------------------------------------
-genre
+sync_genres.py
 -------------------------------------------------------------------------------------------------
 Purpose:
         Update the list of listened genres.
 
 Source:
-        "MUSIC_TRACK"."HISTORIC".
+        "MUSIC_TRACK"."LISTENING_HISTORY"
 
 Input:
         None

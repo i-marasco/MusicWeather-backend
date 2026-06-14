@@ -1,6 +1,6 @@
 """
 -------------------------------------------------------------------------------------------------
-listening
+listening.py
 -------------------------------------------------------------------------------------------------
 Purpose:
         Output the song listened in a period or historic.
@@ -8,9 +8,9 @@ Purpose:
 Source:
         "MUSIC_TRACK"."LISTENING_HISTORY"
 
-Input:
-        start_date(optional):  start date of the selection period.
-        end_date(optional): end date of the selection period.
+Inputs:
+        start_date[optional]:  start date of the selection period.
+        end_date[optional]: end date of the selection period.
 
 Output:
         /history:
