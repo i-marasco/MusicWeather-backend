@@ -20,8 +20,6 @@ from fastapi import APIRouter
 from app.db.conn import get_connection
 
 router = APIRouter()
-conn = get_connection()
-cur = conn.cursor()
 
 @router.get("/artist")
 def get_artist(

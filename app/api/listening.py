@@ -25,8 +25,6 @@ from psycopg2.extras import RealDictCursor
 from app.db.conn import get_connection
 
 router = APIRouter()
-conn = get_connection()
-cur = conn.cursor()
 
 @router.get("/history")
 def get_history(

@@ -11,9 +11,6 @@ from app.db.conn import get_connection
 
 router = APIRouter()
 
-conn = get_connection()
-cur = conn.cursor()
-
 def generate_ranking(period: str, start_date, end_date):
     conn = get_connection()
 
