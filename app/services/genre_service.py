@@ -6,7 +6,7 @@ Note:
         Called by: api/genres.py
 """
 
-from app.database.conn import get_connection
+from app.db.conn import get_connection
 
 def get_top_genres(start_date=None, end_date=None):
     conn = get_connection()

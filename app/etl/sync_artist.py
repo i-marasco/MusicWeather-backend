@@ -18,7 +18,7 @@ Note:
         Stores the total track listened per artist.
 """
 
-from app.database.conn import get_connection
+from app.db.conn import get_connection
 
 conn = get_connection()
 cur = conn.cursor()

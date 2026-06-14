@@ -9,7 +9,7 @@ load_dotenv()
 def get_connection():
     """
     :return
-            Connection to PostgreSQL database.
+            Connection to PostgreSQL db.
     """
     return psycopg2.connect(
         dbname=os.getenv("DB_NAME"),

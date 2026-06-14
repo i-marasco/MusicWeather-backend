@@ -17,7 +17,7 @@ Output:
 """
 
 from fastapi import APIRouter
-from app.database.conn import get_connection
+from app.db.conn import get_connection
 
 router = APIRouter()
 conn = get_connection()

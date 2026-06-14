@@ -19,7 +19,7 @@ Note:
 """
 import os
 import requests
-from app.database.conn import get_connection
+from app.db.conn import get_connection
 from dotenv import load_dotenv
 
 load_dotenv()

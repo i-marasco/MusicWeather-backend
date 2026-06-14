@@ -22,7 +22,7 @@ Note:
 import requests
 import time
 import os
-from app.database.conn import get_connection
+from app.db.conn import get_connection
 from dotenv import load_dotenv
 
 load_dotenv()
