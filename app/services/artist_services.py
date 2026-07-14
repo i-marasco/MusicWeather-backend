@@ -16,16 +16,25 @@ def get_artist(
     try:
         with conn.cursor() as cur:
             cur.execute("""
-                    SELECT "ARTIST_NAME", "LISTENED_AT", "PLAYS"
+                    SELECT "ARTIST_NAME" as artist_name,
+                           "LISTENED_AT" as listened_at,
+                            "PLAYS" as plays
                     FROM "MUSIC_TRACK"."ARTISTS"
             """)
 
             rows = cur.fetchall()
 
+            columns = [column[0] for column in cur.description]
+
+            artists = [
+                dict(zip(columns, row))
+                for row in rows
+            ]
+
+            return {
+                "artists": artists
+            }
+
     finally:
         conn.close()
-
-    return {
-        "artists": rows
-    }
 

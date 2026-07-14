@@ -12,7 +12,7 @@ from app.db.conn import get_connection
 router = APIRouter()
 
 def generate_ranking(period: str, start_date, end_date):
-    print("GENRE RANKING STARTED")  # <-- add this
+    print("GENRE RANKING STARTED")
     conn = get_connection()
 
     try:

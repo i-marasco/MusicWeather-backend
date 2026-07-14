@@ -101,7 +101,14 @@ def get_genres_by_period(start_date = None, end_date = None):
                 """
 
                 cur.execute(query, params)
-                results = cur.fetchall()
+                rows = cur.fetchall()
+
+                columns = [column[0] for column in cur.description]
+
+                genres = [
+                    dict(zip(columns, row))
+                    for row in rows
+                ]
 
         finally:
             conn.close()
@@ -109,5 +116,5 @@ def get_genres_by_period(start_date = None, end_date = None):
         return {
             "start_date": start_date,
             "end_date": end_date,
-            "data": results
+            "data": genres
         }

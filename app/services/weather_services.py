@@ -15,15 +15,15 @@ def get_weather_historic(start_date=None, end_date=None):
 
             query = """
                     SELECT
-                        "OBSERVED_AT",
-                        "CITY",
-                        "LAT",
-                        "LON",
-                        "TEMPERATURE",
-                        "HUMIDITY",
-                        "PRESSURE",
-                        "WIND_SPEED",
-                        "WEATHER_CODE"
+                        "OBSERVED_AT" as observed_at,
+                        "CITY" as city,
+                        "LAT" as lat,
+                        "LON" as lon,
+                        "TEMPERATURE" as temperature,
+                        "HUMIDITY" as humidity,
+                        "PRESSURE" as pressure,
+                        "WIND_SPEED" as wind_speed,
+                        "WEATHER_CODE" as weather_code
                     FROM "WEATHER"."WEATHER_HISTORY"
                     WHERE 1=1
             """
@@ -59,17 +59,17 @@ def get_weather_daily(start_date = None, end_date = None ):
 
             query = """
                 SELECT
-                    "DAY",
-                    "CITY",
-                    "LAT",
-                    "LON",
-                    "AVG_TEMPERATURE",
-                    "MIN_TEMPERATURE",
-                    "MAX_TEMPERATURE",
-                    "AVG_HUMIDITY",
-                    "AVG_PRESSURE",
-                    "AVG_WIND_SPEED",
-                    "MOST_COMMON_WEATHER_CODE"
+                    "DAY" as day,
+                    "CITY" as city,
+                    "LAT" as lat,
+                    "LON" as lon,
+                    "AVG_TEMPERATURE" as avg_temperature,
+                    "MIN_TEMPERATURE" as min_temperature,
+                    "MAX_TEMPERATURE" as max_temperature,
+                    "AVG_HUMIDITY" as avg_humidity,
+                    "AVG_PRESSURE" as avg_pressure,
+                    "AVG_WIND_SPEED" as avg_wind_speed,
+                    "MOST_COMMON_WEATHER_CODE" as most_common_weather_code
                 FROM "WEATHER"."WEATHER_DAILY_SUMMARY"
                 WHERE 1=1
             """
