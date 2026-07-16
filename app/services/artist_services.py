@@ -20,6 +20,7 @@ def get_artist(
                            "LISTENED_AT" as listened_at,
                             "PLAYS" as plays
                     FROM "MUSIC_TRACK"."ARTISTS"
+                    ORDER BY plays DESC
             """)
 
             rows = cur.fetchall()
