@@ -8,6 +8,7 @@ from app.api.genres import router as genres_router
 from app.api.genre_ranking import router as genre_ranking_router
 from app.api.weather import router as weather_router
 from app.api.dashboard import router as dashboard_router
+from app.api.activity import router as activity_router
 
 app = FastAPI(title="Spotify Weather API")
 
@@ -29,6 +30,7 @@ app.include_router(genres_router, tags=["Genres"])
 app.include_router(genre_ranking_router, tags=["Genres Rankings"])
 app.include_router(weather_router, prefix="/weather", tags=["Weather"])
 app.include_router(dashboard_router, tags=["Dashboard"])
+app.include_router(activity_router, prefix="/activity", tags=["Activity"])
 @app.get("/")
 def health_check():
     return {"status": "ok"}
