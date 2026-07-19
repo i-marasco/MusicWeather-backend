@@ -17,11 +17,21 @@ def get_calendar(
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT
-                    DATE("LISTENED_AT") AS day,
-                    COUNT(*) AS plays
-                FROM "MUSIC_TRACK"."LISTENING_HISTORY"
-                GROUP BY DATE("LISTENED_AT")
-                ORDER BY day;
+                    calendar.day::date AS day,
+                    COUNT(lh."LISTENED_AT") AS plays
+                
+                    FROM generate_series(
+                        CURRENT_DATE - INTERVAL '1 year',
+                        CURRENT_DATE,
+                        interval '1 day'
+                    ) AS calendar(day)
+                
+                LEFT JOIN "MUSIC_TRACK"."LISTENING_HISTORY" lh
+                    ON DATE(lh."LISTENED_AT") = calendar.day
+                
+                GROUP BY calendar.day
+                
+                ORDER BY calendar.day;
             """)
 
             rows = cur.fetchall()
