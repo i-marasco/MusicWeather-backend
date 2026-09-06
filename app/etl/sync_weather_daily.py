@@ -37,7 +37,17 @@ def sync_weather_daily():
                                                                                "AVG_WIND_SPEED",
                                                                                "MOST_COMMON_WEATHER_CODE")
                                 SELECT
-                                    DATE ("OBSERVED_AT") AS day, "CITY", "LAT", "LON", AVG ("TEMPERATURE"), MIN ("TEMPERATURE"), MAX ("TEMPERATURE"), AVG ("HUMIDITY"), AVG ("PRESSURE"), AVG ("WIND_SPEED"), MODE() WITHIN
+                                    DATE ("OBSERVED_AT") AS day, 
+                                    "CITY", 
+                                    "LAT", 
+                                    "LON", 
+                                    ROUND(AVG("TEMPERATURE")::numeric, 2), 
+                                    ROUND(MIN("TEMPERATURE")::numeric, 2),
+                                    ROUND(MAX("TEMPERATURE")::numeric, 2),
+                                    ROUND(AVG("HUMIDITY")::numeric, 2),
+                                    ROUND(AVG("PRESSURE")::numeric, 2),
+                                    ROUND(AVG("WIND_SPEED")::numeric, 2),
+                                    MODE() WITHIN
                                 GROUP (ORDER BY "WEATHER_CODE") AS most_common_weather
                                 FROM "WEATHER"."WEATHER_HISTORY"
                                 GROUP BY DATE ("OBSERVED_AT"), "CITY", "LAT", "LON"
